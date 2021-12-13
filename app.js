@@ -1,31 +1,48 @@
 let form = document.querySelector("form");
-let arrayDeMensajes = JSON.parse(localStorage.getItem("mensajesGuardados")) || [];
-let lista = document.getElementById("lista");
+let messagesArray = JSON.parse(localStorage.getItem("messagesStored")) || [];
+let list = document.getElementById("list");
 
-document.addEventListener("DOMContentLoaded", function cargarMensajes() {
-  let mensajesParseados = JSON.parse(localStorage.getItem("mensajesGuardados"));
-  mensajesParseados.forEach(element => {
+/* ======================= LOAD MESSAGES WHEN PAGE FINISH LOADING ======================= */
+
+document.addEventListener("DOMContentLoaded", function MessagesLoad() {
+  let parsedMessages = JSON.parse(localStorage.getItem("messagesStored"));
+  parsedMessages.forEach((element) => {
     var entry = document.createElement("li");
     entry.appendChild(document.createTextNode(element));
-    lista.appendChild(entry);
+    list.appendChild(entry);
   });
-  
 });
 
-form.addEventListener("submit", guardar);
+/* ======================= SAVE MESSAGE =================================== */
 
-function guardar(event) {
-  // Evito el comportamiento por default, en este caso evito que recargue la pagina.
+form.addEventListener("submit", save);
+
+function save(event) {
+
+  // ========================== HTML RENDER =====================
+
+  // Store in variable the value of input (user message)
+  let message = form.children[1].value;
+
+  // Prevent the reload on save button
   event.preventDefault();
 
-  // Inicializo un array para guardar los mensajes
+  // Modularize the createElement
+  var entry = document.createElement("li");
 
-  // Pushea el nuevo mensaje al array
-  arrayDeMensajes.push(form.children[1].value);
+  // create TextNode into the new LI, with the message the user entered.
+  entry.appendChild(document.createTextNode(message));
 
-  let arrayDeMensajesString = JSON.stringify(arrayDeMensajes);
+  // append the new LI to the list
+  list.appendChild(entry);
+  
+  // =================== LOCAL STORAGE SAVE =====================
+  
+  messagesArray.push(message);
 
-  localStorage.setItem("mensajesGuardados", arrayDeMensajesString);
+  let messagesArrayString = JSON.stringify(messagesArray);
+
+  localStorage.setItem("messagesStored", messagesArrayString);
 
   // Resetea el formulario una vez hecho el click en el boton Guardar
   form.reset();
