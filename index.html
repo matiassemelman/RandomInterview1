@@ -14,16 +14,18 @@
 <!-- According to user input text... -->
 <form id="userInputForm" >
     <label for="inputMessage">Some message to store</label>
-    <input id="inputMessage" name="inputMessage">
+    <input id="inputMessage" name="inputMessage" required>
     <button >Save</button>
 </form>
 
-<ul>
+<ul id="list">
     <li>Your stored messages are:</li>
 </ul>
 
 <!-- According to previous messages-->
-<button>Capitalize each word of previous messages</button>
+<button id="upperCaseButton">Capitalize each word of previous messages</button>
+<button id="upperCaseButton2">Capitalize each word of previous messages</button>
+
 <p>Make this button in 2 different ways, one modifying user entered text, and one without it.</p>
 <!-- Make this button in 2 different ways, one modifying user entered text, and one without it.-->
 <script src="app.js"></script>
