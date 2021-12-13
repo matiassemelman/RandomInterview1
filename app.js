@@ -44,6 +44,5 @@ function save(event) {
 
   localStorage.setItem("messagesStored", messagesArrayString);
 
-  // Resetea el formulario una vez hecho el click en el boton Guardar
   form.reset();
 }
